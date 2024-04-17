@@ -5,7 +5,7 @@
 */
 
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.multiqc_config, params.kraken2db, params.dfast_config ]
+def checkPathParamList = [ params.input, params.multiqc_config, params.kraken2db, params.dfast_config, params.gtdb ]
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check krakendb
