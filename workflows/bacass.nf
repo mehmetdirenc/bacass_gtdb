@@ -61,6 +61,7 @@ include { KRAKEN2_KRAKEN2 as KRAKEN2            } from '../modules/nf-core/krake
 include { KRAKEN2_KRAKEN2 as KRAKEN2_LONG       } from '../modules/nf-core/kraken2/kraken2/main'
 include { QUAST                                 } from '../modules/nf-core/quast/main'
 include { GUNZIP                                } from '../modules/nf-core/gunzip/main'
+include { CLASSIFYWF                            } from '../modules/nf-core/classifywf/main'
 include { PROKKA                                } from '../modules/nf-core/prokka/main'
 include { MULTIQC                               } from '../modules/nf-core/multiqc/main'
 
