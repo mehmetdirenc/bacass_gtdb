@@ -37,7 +37,6 @@ process UNICYCLER {
         $input_reads \\
         --out ./
     mkdir bins
-    ls ./ > ls_out.txt
     cp assembly.fasta bins/${prefix}_assembly.fasta
     mv assembly.fasta ${prefix}.scaffolds.fa
     gzip -n ${prefix}.scaffolds.fa
