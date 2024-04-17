@@ -16,6 +16,14 @@ if(! params.skip_kraken2){
         exit 1, "Missing Kraken2 DB arg"
     }
 }
+if (! params.skip_classifywf) {
+    Channel
+        .value(file( "${params.gtdb}" ))
+        .set { ch_gtdb }
+} else {
+    ch_gtdb = Channel.empty()
+}
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +69,7 @@ include { KRAKEN2_KRAKEN2 as KRAKEN2            } from '../modules/nf-core/krake
 include { KRAKEN2_KRAKEN2 as KRAKEN2_LONG       } from '../modules/nf-core/kraken2/kraken2/main'
 include { QUAST                                 } from '../modules/nf-core/quast/main'
 include { GUNZIP                                } from '../modules/nf-core/gunzip/main'
-include { CLASSIFYWF                            } from '../modules/nf-core/classifywf/main'
+include { GTDBTK_CLASSIFYWF as CLASSIFYWF       } from '../modules/nf-core/classifywf/main'
 include { PROKKA                                } from '../modules/nf-core/prokka/main'
 include { MULTIQC                               } from '../modules/nf-core/multiqc/main'
 
@@ -416,6 +424,19 @@ workflow BACASS {
         )
         ch_prokka_txt_multiqc   = PROKKA.out.txt.collect()
         ch_versions             = ch_versions.mix(PROKKA.out.versions)
+    }
+
+    ch_classifywf_txt_multiqc = Channel.empty()
+    if ( !params.skip_classifywf) {
+
+        CLASSIFYWF (
+            Unicycler.out.bins,
+            ch_gtdb,
+            []
+
+        )
+        ch_classifywf_txt_multiqc   = CLASSIFYWF.out.txt.collect()
+        ch_versions             = ch_versions.mix(CLASSIFYWF.out.versions)
     }
 
     //

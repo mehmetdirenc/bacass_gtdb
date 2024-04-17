@@ -14,6 +14,7 @@ process UNICYCLER {
     tuple val(meta), path('*.scaffolds.fa.gz'), emit: scaffolds
     tuple val(meta), path('*.assembly.gfa.gz'), emit: gfa
     tuple val(meta), path('*.log')            , emit: log
+    path "Unicycler/bins/*"                   , emit: bins
     path  "versions.yml"                      , emit: versions
 
     when:
@@ -35,7 +36,8 @@ process UNICYCLER {
         $args \\
         $input_reads \\
         --out ./
-
+    mkdir bins
+    cp assembly.fasta bins/${prefix}_assembly.fasta
     mv assembly.fasta ${prefix}.scaffolds.fa
     gzip -n ${prefix}.scaffolds.fa
     mv assembly.gfa ${prefix}.assembly.gfa
