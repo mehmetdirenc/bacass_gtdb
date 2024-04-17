@@ -430,7 +430,7 @@ workflow BACASS {
     if ( !params.skip_classifywf) {
 
         CLASSIFYWF (
-            Unicycler.out.bins,
+            UNICYCLER.out.bins,
             ch_gtdb,
             []
 
