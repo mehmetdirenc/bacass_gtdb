@@ -435,7 +435,7 @@ workflow BACASS {
             []
 
         )
-        ch_classifywf_txt_multiqc   = CLASSIFYWF.out.txt.collect()
+        //ch_classifywf_txt_multiqc   = CLASSIFYWF.out.txt.collect()
         ch_versions             = ch_versions.mix(CLASSIFYWF.out.versions)
     }
 
