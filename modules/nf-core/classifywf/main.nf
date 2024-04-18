@@ -51,7 +51,7 @@ process GTDBTK_CLASSIFYWF {
         $args \\
         --genome_dir $bins \\
         --prefix "gtdbtk.${prefix}" \\
-        --out_dir "\${PWD}" \\
+        --out_dir ./ \\
         --cpus $task.cpus  \\
         --skip_ani_screen \\
         --extension fasta
