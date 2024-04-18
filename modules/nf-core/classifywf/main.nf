@@ -52,7 +52,8 @@ process GTDBTK_CLASSIFYWF {
         --prefix "gtdbtk.${prefix}" \\
         --out_dir "\${PWD}" \\
         --cpus $task.cpus  \\
-        --skip_ani_screen
+        --skip_ani_screen \\
+        --extension fasta
 
     ## If mash db given, classify/ and identify/ directories won't be created
     if [[ -d classify/ ]]; then
