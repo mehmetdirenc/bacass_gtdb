@@ -10,12 +10,12 @@ process GTDBTK_CLASSIFYWF {
         'biocontainers/gtdbtk:2.3.2--pyhdfd78af_0' }"
 
     input:
-    tuple val(meta), path bins
+    path bins
     path database
 //     path(mash_db)
 
     output:
-    tuple val(meta), path("gtdbtk.${prefix}.*.summary.tsv")         , emit: summary
+    /*path("gtdbtk.${prefix}.*.summary.tsv")         , emit: summary
     tuple val(meta), path("gtdbtk.${prefix}.*.classify.tree.gz")    , emit: tree, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.*.markers_summary.tsv") , emit: markers, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.*.msa.fasta.gz")        , emit: msa, optional: true
@@ -23,7 +23,8 @@ process GTDBTK_CLASSIFYWF {
     tuple val(meta), path("gtdbtk.${prefix}.*.filtered.tsv")        , emit: filtered, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.failed_genomes.tsv")    , emit: failed, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.log")                   , emit: log
-    tuple val(meta), path("gtdbtk.${prefix}.warnings.log")          , emit: warnings
+    tuple val(meta), path("gtdbtk.${prefix}.warnings.log")          , emit: warnings*/
+    path "gtdbtk.${prefix}*"
     path("versions.yml")                                            , emit: versions
 
     when:
