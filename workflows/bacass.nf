@@ -17,9 +17,10 @@ if(! params.skip_kraken2){
     }
 }
 if (! params.skip_classifywf) {
-    Channel
-        .value(file( "${params.gtdb}" ))
-        .set { ch_gtdb }
+    ch_gtdb = Channel.fromPath(params.ch_gtdb)
+//     Channel
+//         .value(file( "${params.gtdb}" ))
+//         .set { ch_gtdb }
 } else {
     ch_gtdb = Channel.empty()
 }

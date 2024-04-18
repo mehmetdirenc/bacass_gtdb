@@ -51,7 +51,8 @@ process GTDBTK_CLASSIFYWF {
         --genome_dir $bins \\
         --prefix "gtdbtk.${prefix}" \\
         --out_dir "\${PWD}" \\
-        --cpus $task.cpus
+        --cpus $task.cpus  \\
+        --skip_ani_screen
 
     ## If mash db given, classify/ and identify/ directories won't be created
     if [[ -d classify/ ]]; then
