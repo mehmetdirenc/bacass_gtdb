@@ -1,6 +1,6 @@
 process UNICYCLER {
     tag "$meta.id"
-    label 'process_high'
+    label 'process_whynotveryhigh'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
