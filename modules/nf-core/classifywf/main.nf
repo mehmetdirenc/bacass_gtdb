@@ -10,7 +10,7 @@ process GTDBTK_CLASSIFYWF {
         'biocontainers/gtdbtk:2.3.2--pyhdfd78af_0' }"
 
     input:
-    path bins
+    tuple val(meta), path bins
     path database
 //     path(mash_db)
 
@@ -24,7 +24,7 @@ process GTDBTK_CLASSIFYWF {
     tuple val(meta), path("gtdbtk.${prefix}.failed_genomes.tsv")    , emit: failed, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.log")                   , emit: log
     tuple val(meta), path("gtdbtk.${prefix}.warnings.log")          , emit: warnings
-    path("versions.yml")                           , emit: versions
+    path("versions.yml")                                            , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
