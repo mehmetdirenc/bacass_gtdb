@@ -11,7 +11,7 @@ process GTDBTK_CLASSIFYWF {
     input:
     tuple val(meta), path("bins/*")
     tuple val(db_name), path("database/*")
-    path(mash_db)
+//     path(mash_db)
 
     output:
     tuple val(meta), path("gtdbtk.${prefix}.*.summary.tsv")         , emit: summary
@@ -31,9 +31,10 @@ process GTDBTK_CLASSIFYWF {
     script:
     def args = task.ext.args ?: ''
     def pplacer_scratch = params.gtdbtk_pplacer_scratch ? "--scratch_dir pplacer_tmp" : ""
-    def mash_mode = mash_db ? "--mash_db ${mash_db}" : "--skip_ani_screen"
+//     def mash_mode = mash_db ? "--mash_db ${mash_db}" : "--skip_ani_screen"
     prefix = task.ext.prefix ?: "${meta.id}"
 
+    //$mash_mode taken out \\
     """
     export GTDBTK_DATA_PATH="\${PWD}/database"
     if [ ${pplacer_scratch} != "" ] ; then
@@ -46,7 +47,6 @@ process GTDBTK_CLASSIFYWF {
         --prefix "gtdbtk.${prefix}" \\
         --out_dir "\${PWD}" \\
         --cpus $task.cpus \\
-        $mash_mode \\
         $pplacer_scratch \\
         --min_perc_aa $params.gtdbtk_min_perc_aa \\
         --min_af $params.gtdbtk_min_af

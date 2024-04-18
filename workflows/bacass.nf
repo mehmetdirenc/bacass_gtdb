@@ -5,7 +5,7 @@
 */
 
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.multiqc_config, params.kraken2db, params.dfast_config, params.gtdb ]
+def checkPathParamList = [ params.input, params.multiqc_config, params.kraken2db, params.dfast_config, params.gtdb ,params.mashdb ]
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check krakendb
@@ -431,8 +431,7 @@ workflow BACASS {
 
         CLASSIFYWF (
             UNICYCLER.out.bins,
-            ch_gtdb,
-            []
+            ch_gtdb
 
         )
         //ch_classifywf_txt_multiqc   = CLASSIFYWF.out.txt.collect()
