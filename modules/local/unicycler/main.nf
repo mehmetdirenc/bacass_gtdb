@@ -14,7 +14,7 @@ process UNICYCLER {
     tuple val(meta), path('*.scaffolds.fa.gz'), emit: scaffolds
     tuple val(meta), path('*.assembly.gfa.gz'), emit: gfa
     tuple val(meta), path('*.log')            , emit: log
-    path "bins/*"                             , emit: bins
+    path "bins"                               , emit: bins
     path  "versions.yml"                      , emit: versions
 
     when:
