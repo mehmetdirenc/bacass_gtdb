@@ -1,7 +1,7 @@
 process GTDBTK_CLASSIFYWF {
     tag "${prefix}"
     // test without label
-    //label 'process_medium'
+    label 'process_whynotveryhigh'
 
     // WARN: Version information not provided by tool on CLI. Please update version string below when bumping container versions.
     conda "${moduleDir}/environment.yml"
