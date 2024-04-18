@@ -32,7 +32,8 @@ process GTDBTK_CLASSIFYWF {
     def args = task.ext.args ?: ''
     def pplacer_scratch = params.gtdbtk_pplacer_scratch ? "--scratch_dir pplacer_tmp" : ""
 //     def mash_mode = mash_db ? "--mash_db ${mash_db}" : "--skip_ani_screen"
-    prefix = task.ext.prefix ?: "${meta.id}"
+    //prefix = task.ext.prefix ?: "${meta.id}"
+    prefix = "test"
 
     /*$mash_mode taken out \\
     \\
@@ -80,7 +81,8 @@ process GTDBTK_CLASSIFYWF {
 
     stub:
     def VERSION = '2.3.2' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
-    prefix = task.ext.prefix ?: "${meta.id}"
+    //prefix = task.ext.prefix ?: "${meta.id}"
+    prefix = "test"
     """
     touch gtdbtk.${prefix}.stub.summary.tsv
     echo "" | gzip > gtdbtk.${prefix}.stub.classify.tree.gz
