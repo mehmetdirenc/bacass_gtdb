@@ -15,7 +15,7 @@ process GTDBTK_CLASSIFYWF {
 //     path(mash_db)
 
     output:
-    /*tuple val(meta), path("gtdbtk.${prefix}.*.summary.tsv")         , emit: summary
+    tuple val(meta), path("gtdbtk.${prefix}.*.summary.tsv")         , emit: summary
     tuple val(meta), path("gtdbtk.${prefix}.*.classify.tree.gz")    , emit: tree, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.*.markers_summary.tsv") , emit: markers, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.*.msa.fasta.gz")        , emit: msa, optional: true
@@ -23,7 +23,7 @@ process GTDBTK_CLASSIFYWF {
     tuple val(meta), path("gtdbtk.${prefix}.*.filtered.tsv")        , emit: filtered, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.failed_genomes.tsv")    , emit: failed, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.log")                   , emit: log
-    tuple val(meta), path("gtdbtk.${prefix}.warnings.log")          , emit: warnings*/
+    tuple val(meta), path("gtdbtk.${prefix}.warnings.log")          , emit: warnings
     path("versions.yml")                           , emit: versions
 
     when:
