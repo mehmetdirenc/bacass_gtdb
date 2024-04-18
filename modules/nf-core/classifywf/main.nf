@@ -9,12 +9,12 @@ process GTDBTK_CLASSIFYWF {
         'biocontainers/gtdbtk:2.3.2--pyhdfd78af_0' }"
 
     input:
-    tuple val(meta), path("bins/*")
-    tuple val(db_name), path("database/*")
+    path bins
+    path database
 //     path(mash_db)
 
     output:
-    tuple val(meta), path("gtdbtk.${prefix}.*.summary.tsv")         , emit: summary
+    /*tuple val(meta), path("gtdbtk.${prefix}.*.summary.tsv")         , emit: summary
     tuple val(meta), path("gtdbtk.${prefix}.*.classify.tree.gz")    , emit: tree, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.*.markers_summary.tsv") , emit: markers, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.*.msa.fasta.gz")        , emit: msa, optional: true
@@ -22,7 +22,7 @@ process GTDBTK_CLASSIFYWF {
     tuple val(meta), path("gtdbtk.${prefix}.*.filtered.tsv")        , emit: filtered, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.failed_genomes.tsv")    , emit: failed, optional: true
     tuple val(meta), path("gtdbtk.${prefix}.log")                   , emit: log
-    tuple val(meta), path("gtdbtk.${prefix}.warnings.log")          , emit: warnings
+    tuple val(meta), path("gtdbtk.${prefix}.warnings.log")          , emit: warnings*/
     path("versions.yml")                           , emit: versions
 
     when:
@@ -34,22 +34,23 @@ process GTDBTK_CLASSIFYWF {
 //     def mash_mode = mash_db ? "--mash_db ${mash_db}" : "--skip_ani_screen"
     prefix = task.ext.prefix ?: "${meta.id}"
 
-    //$mash_mode taken out \\
+    /*$mash_mode taken out \\
+    \\
+        $pplacer_scratch \\
+        --min_perc_aa $params.gtdbtk_min_perc_aa \\
+        --min_af $params.gtdbtk_min_af*/
     """
-    export GTDBTK_DATA_PATH="\${PWD}/database"
+    export GTDBTK_DATA_PATH="$database"
     if [ ${pplacer_scratch} != "" ] ; then
         mkdir pplacer_tmp
     fi
 
     gtdbtk classify_wf \\
         $args \\
-        --genome_dir bins \\
+        --genome_dir $bins \\
         --prefix "gtdbtk.${prefix}" \\
         --out_dir "\${PWD}" \\
-        --cpus $task.cpus \\
-        $pplacer_scratch \\
-        --min_perc_aa $params.gtdbtk_min_perc_aa \\
-        --min_af $params.gtdbtk_min_af
+        --cpus $task.cpus
 
     ## If mash db given, classify/ and identify/ directories won't be created
     if [[ -d classify/ ]]; then
